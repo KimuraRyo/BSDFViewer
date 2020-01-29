@@ -56,6 +56,7 @@ find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 if(MSVC)
+    message("MSVC found")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
 
     # 32 bit executable
@@ -65,8 +66,9 @@ if(MSVC)
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LARGEADDRESSAWARE")
     endif()
 else()
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse3")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse3")
+    message("non-MSVC found")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse3 -O3")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse3 -O3")
 endif()
 
 find_package(OpenMP QUIET)
